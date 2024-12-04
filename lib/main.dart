@@ -59,7 +59,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cámara')),
+      appBar: AppBar(title: const Text('Cámara')),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -68,7 +68,7 @@ class _CameraScreenState extends State<CameraScreen> {
             return CameraPreview(_controller);
           } else {
             // Muestra un indicador de carga.
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
@@ -92,7 +92,7 @@ class _CameraScreenState extends State<CameraScreen> {
             print(e);
           }
         },
-        child: Icon(Icons.camera_alt),
+        child: const Icon(Icons.camera_alt),
       ),
     );
   }
@@ -101,7 +101,7 @@ class _CameraScreenState extends State<CameraScreen> {
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
 
-  const DisplayPictureScreen({Key? key, required this.imagePath}) : super(key: key);
+  const DisplayPictureScreen({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
