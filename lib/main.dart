@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 void main() async {
-  // Asegúrate de inicializar las cámaras disponibles antes de ejecutar la app.
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
@@ -20,7 +19,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CameraScreen(camera: camera),
+      home: HomeScreen(camera: camera),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  final CameraDescription camera;
+
+  const HomeScreen({Key? key, required this.camera}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Inicio')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CameraScreen(camera: camera),
+              ),
+            );
+          },
+          child: const Text('Activar cámara'),
+        ),
+      ),
     );
   }
 }
@@ -59,7 +84,15 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cámara')),
+      appBar: AppBar(
+        title: const Text('Cámara'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -106,7 +139,15 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Foto tomada')),
+      appBar: AppBar(
+        title: const Text('Foto tomada'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Image.file(File(imagePath)),
     );
   }
