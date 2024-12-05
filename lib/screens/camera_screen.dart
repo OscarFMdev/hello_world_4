@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 import 'display_picture_screen.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -31,6 +33,21 @@ class _CameraScreenState extends State<CameraScreen> {
     super.dispose();
   }
 
+  Future<String> _saveImage(File image) async {
+    // Obtén el directorio para guardar las imágenes.
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+
+    // Crea una nueva ruta para la imagen.
+    final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final savedImage = File('$path/$fileName');
+
+    // Guarda la imagen en el directorio.
+    await image.copy(savedImage.path);
+
+    return savedImage.path;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +75,15 @@ class _CameraScreenState extends State<CameraScreen> {
           try {
             await _initializeControllerFuture;
             final image = await _controller.takePicture();
+
+            // Guarda la imagen.
+            final savedImagePath = await _saveImage(File(image.path));
+
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    DisplayPictureScreen(imagePath: image.path),
+                    DisplayPictureScreen(imagePath: savedImagePath),
               ),
             );
           } catch (e) {

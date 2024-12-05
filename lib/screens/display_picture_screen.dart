@@ -19,7 +19,19 @@ class DisplayPictureScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Image.file(File(imagePath)),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          const Text(
+            'Imagen guardada en el dispositivo',
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: Image.file(File(imagePath)),
+          ),
+        ],
+      ),
     );
   }
 }
