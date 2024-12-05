@@ -13,7 +13,7 @@ void main() {
     );
 
     // Construir la aplicación y pasar la cámara simulada.
-    await tester.pumpWidget(MyApp(camera: camera));
+    await tester.pumpWidget(const MyApp(camera: camera));
 
     // Verificar que el contador comienza en 0.
     expect(find.text('0'), findsOneWidget);

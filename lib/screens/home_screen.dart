@@ -5,7 +5,7 @@ import 'camera_screen.dart';
 class HomeScreen extends StatelessWidget {
   final CameraDescription camera;
 
-  const HomeScreen({Key? key, required this.camera}) : super(key: key);
+  const HomeScreen({super.key, required this.camera});
 
   @override
   Widget build(BuildContext context) {
