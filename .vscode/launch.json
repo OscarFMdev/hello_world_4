@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "hello_world_4",
+            "name": "app_movil_tracking",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "hello_world_4 (profile mode)",
+            "name": "app_movil_tracking (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "hello_world_4 (release mode)",
+            "name": "app_movil_tracking (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
